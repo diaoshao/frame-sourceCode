@@ -82,10 +82,7 @@ function toNumber (val) {
  * Make a map and return a function for checking if a key
  * is in that map.
  */
-function makeMap (
-  str,
-  expectsLowerCase
-) {
+function makeMap (str, expectsLowerCase) {
   var map = Object.create(null);
   var list = str.split(',');
   for (var i = 0; i < list.length; i++) {
@@ -1206,9 +1203,7 @@ strats.watch = function (parentVal, childVal) {
 /**
  * Other object hashes.
  */
-strats.props =
-strats.methods =
-strats.computed = function (parentVal, childVal) {
+strats.props = strats.methods = strats.computed = function (parentVal, childVal) {
   if (!childVal) { return Object.create(parentVal || null) }
   if (!parentVal) { return childVal }
   var ret = Object.create(null);
