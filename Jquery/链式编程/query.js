@@ -1,6 +1,6 @@
 /* 
-	* Author：YangShaoFeng.
-	* Github: iysf
+	* Author: YangShaoFeng.
+	* Github: https://github.com/iysf
 	* Email: yangshaofengfe@gmail.com
 	* Version: 1.0.0
 */
@@ -9,34 +9,15 @@ var log = console.log.bind(console)
 
 !(function ( global, factory ) {
 
-var version = "1.0.0"
+var version = "1.0.0",
+		arr     = [],
+		push    = arr.push;
 
 var $ = function ( selector ) {
-	// detail 实现逻辑
-	if ( typeof selector === 'string' ) {
-		var oDiv = document.getElementsByTagName('div'),
-		     str = selector.slice( 0, 1 ),
-			newStr = selector.slice( 1, selector.length )
 
-		if ( str === '#' ) {
-			// 问题出在这儿，return的是原本的DOM，需要将prototype指向jquery
-			log(oDiv)
-			oDiv.prototype = $.fn
-			log(oDiv)
-			return oDiv
+	// console.log(new $.fn.init( selector ).__proto__.constructor == $.prototype.constructor)
 
-		}
-
-	} else if ( typeof selector === 'function' ) {
-
-		window.addEventListener('load',selector)
-		return [document]
-
-	} else {
-
-		// throw new TypeError (selector + ' is not a string || function ')
-
-	}
+	return new $.fn.init( selector )
 
 }
 
@@ -55,18 +36,41 @@ $.fn = $.prototype = {
 
 }
 
-// innerHTML and text
-$.fn.html = function () {
-	return this
-} 
+var init = $.fn.init = function ( selector ) {
 
-window.$ = function () {
-	return new $(arguments[0])
+	if ( typeof selector == 'string' ) {
+
+		push.apply( this, document.querySelectorAll(selector) )
+
+	}
+
+}
+
+init.prototype = $.fn
+
+$.fn.each = function ( func ) {
+
+	for ( var i = 0; i < this.length; i++  ) {
+
+		func( this[i], i, this )
+
+	}
+
+}
+
+$.fn.html = function ( text ) {
+
+	this.each( function ( item, index, self ) { 
+
+		item.innerHTML = text		
+
+	} )
+
+	return this
 }
 
 
-})( window, function ( window, noGlabol ) {
 
+global.$ = global.jQuery = $
 
-
-})
+})( this, function ( window, noGlabol ) {  })
