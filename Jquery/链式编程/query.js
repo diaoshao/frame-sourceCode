@@ -36,7 +36,7 @@ $.fn = $.prototype = {
 
 }
 
-var init = $.fn.init = function ( selector ) {
+$.fn.init = function ( selector ) {
 
 	if ( typeof selector == 'string' ) {
 
@@ -46,7 +46,8 @@ var init = $.fn.init = function ( selector ) {
 
 }
 
-init.prototype = $.fn
+$.fn.init.prototype = $.fn
+
 
 $.fn.each = function ( func ) {
 
