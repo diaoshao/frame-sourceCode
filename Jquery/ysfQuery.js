@@ -1,74 +1,77 @@
-	var log = console.log.bind(console)
-	// log(log)
-	!(function ( global ) {
-		
-		var $ = function ( params ) {
+/* 
+	* Author: YangShaoFeng.
+	* Github: https://github.com/iysf
+	* Email: yangshaofengfe@gmail.com
+	* Version: 1.0.0
+*/
 
-			if( typeof params == 'string' ) {
+var log = console.log.bind(console)
 
-				return $.fn.queryDom( params )
+!(function ( global, factory ) {
 
-			} else if ( typeof params == 'function' ) {
+var version = "1.0.0",
+		arr     = [],
+		push    = arr.push;
 
-				window.addEventListener('load', params)
+var $ = function ( selector ) {
 
-			}
+	// console.log(new $.fn.init( selector ).__proto__.constructor == $.prototype.constructor)
 
-		}
+	return new $.fn.init( selector )
 
-		$.fn = $.prototype
+}
 
-		// log($)
-		// log($.fn)	
+$.fn = $.prototype = {
+	
+	// The current version of jQuery being used
+	Jquery: version,
 
-		// $.fn.html = function () {
+	constructor: $,
 
-			// console.log(html,"123");
+	// The default length of a jQuery object is 0
+	length: 0,
 
-		// }
+	// Start with an empty selector
+	selector: "",
 
-		$.fn.queryDom = function ( type ) {
+}
 
-			if ( typeof type == 'string' ) {
+$.fn.init = function ( selector ) {
 
-				var str = type.substring('0', '1'),
+	if ( typeof selector == 'string' ) {
 
-			      newArr = document.getElementsByTagName('div'),
+		push.apply( this, document.querySelectorAll(selector) )
 
-			      arr = [],
+	}
 
-				    oDomName = type.substring('1', type.length);
+}
 
-					for ( var i = 0; i < newArr.length; i++ ) {
-
-						if ( str == '.' ) {
-
-							if ( newArr[i].className == oDomName) {
-
-								arr.push( newArr[i] )
-
-							}
-
-						} else if ( str == '#' ) {
-
-							if ( newArr[i].id == oDomName ) {
-
-								arr.push( newArr[i] )
-
-							}
-
-						} else {
-
-							return document.querySelectorAll(type)
-
-						}
-
-					}
-
-					return arr
-			}
-		}
+$.fn.init.prototype = $.fn
 
 
-		global.$ = $
-	})(window);
+$.fn.each = function ( func ) {
+
+	for ( var i = 0; i < this.length; i++  ) {
+
+		func( this[i], i, this )
+
+	}
+
+}
+
+$.fn.html = function ( text ) {
+
+	this.each( function ( item, index, self ) { 
+
+		item.innerHTML = text		
+
+	} )
+
+	return this
+}
+
+
+
+global.$ = global.jQuery = $
+
+})( this, function ( window, noGlabol ) {  })
