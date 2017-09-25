@@ -5,6 +5,8 @@
  * Version: 1.0.0
  */
 	
+// 
+
 !(function(global){
 
 	function Vue( paramsObj ) {
