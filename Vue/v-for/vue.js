@@ -4,24 +4,45 @@ var log = console.log.bind(console)
 
 function Vue ( paramsObj ) {
 
+
 	var oFor = document.querySelector('[v-for]')
+
+	// 截取规则 Start
+	var _ = trim(oFor.innerHTML)
+	console.log(_)
+	_ = _.substring(0, _.length - 2)
+	_ = _.substring(_.lastIndexOf('.')+1, _.length)
+	// 截取规则 End
 
 	var v_for = oFor.getAttribute('v-for')
 	
-	v_for = trim(v_for)
+	v_for = trim(v_for)	
 
 	var result = v_for.split('in')
 
 	var firstResult = result[0]
 	var lastResult = result[1]
 
-	for ( var item in paramsObj.data[lastResult] ) {
+	var data = paramsObj.data[lastResult]
 
-		console.log(paramsObj.data[lastResult][item])
-		
+	for ( var item in data ) {
+
+		oFor.removeAttribute('v-for')
+
+		var oDom = oFor.cloneNode(true)
+
+		for ( var key in data[item] ) {
+			if ( key == _ ) {
+				oDom.innerHTML = data[item][key]
+			}
+
+		}
+
+		oFor.parentNode.appendChild(oDom)
+
 	}
 
-
+	oFor.parentNode.removeChild(oFor)
 
 
 	this.el = paramsObj.el
@@ -30,11 +51,18 @@ function Vue ( paramsObj ) {
 
 	this.methods = paramsObj.methods
 
-	// 去除空格
-	function trim(val) {
-		return val.replace(/\s+/g, "");
-	}
-		
+
+
+}
+
+// is Array
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+// delete space
+function trim(val) {
+	return val.replace(/\s+/g, "");
 }
 
 global.Vue = Vue
