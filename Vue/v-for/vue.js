@@ -44,7 +44,6 @@ function Vue ( paramsObj ) {
 
 	oFor.parentNode.removeChild(oFor)
 
-
 	this.el = paramsObj.el
 
 	this.data = paramsObj.data
@@ -60,7 +59,7 @@ function isArray(val) {
   return toString.call(val) === '[object Array]';
 }
 
-// delete space
+// delete All space
 function trim(val) {
 	return val.replace(/\s+/g, "");
 }
