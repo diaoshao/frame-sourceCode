@@ -22,7 +22,7 @@ var $ = function ( selector ) {
 }
 
 $.fn = $.prototype = {
-	
+
 	// The current version of jQuery being used
 	Jquery: version,
 
@@ -61,9 +61,9 @@ $.fn.each = function ( func ) {
 
 $.fn.html = function ( text ) {
 
-	this.each( function ( item, index, self ) { 
+	this.each( function ( item, index, self ) {
 
-		item.innerHTML = text		
+		item.innerHTML = text
 
 	} )
 

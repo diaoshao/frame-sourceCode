@@ -1,13 +1,12 @@
 /*!
- * jQuery JavaScript Library v1.12.4
- * http://jquery.com/
  *
- * Includes Sizzle.js
- * http://sizzlejs.com/
+ * Author: YangShaoFeng.
  *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license
- * http://jquery.org/license
+ * Github: https://github.com/iysf
+ *
+ * Email: yangshaofengfe@gmail.com
+ *
+ * Version: 1.0.0
  *
  * Date: 2016-05-20T17:17Z
  */
