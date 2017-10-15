@@ -12,7 +12,7 @@ function Vue ( paramsObj ) {
 	console.log(_)
 	_ = _.substring(0, _.length - 2)
 	_ = _.substring(_.lastIndexOf('.')+1, _.length)
-	// 截取规则 End
+	// 截取规则   End
 
 	var v_for = oFor.getAttribute('v-for')
 	

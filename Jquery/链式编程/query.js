@@ -13,6 +13,8 @@ var version = "1.0.0",
 		arr     = [],
 		push    = arr.push;
 
+$('#app').html()
+
 var $ = function ( selector ) {
 
 	// console.log(new $.fn.init( selector ).__proto__.constructor == $.prototype.constructor)
