@@ -43,6 +43,8 @@
 //"use strict";
 var deletedIds = [];
 
+var log = console.log.bind(console)
+
 var document = window.document;
 
 var slice = deletedIds.slice;
